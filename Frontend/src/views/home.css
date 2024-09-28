@@ -463,6 +463,15 @@
   width: 100%;
   object-fit: cover;
 }
+.home-divider-image {
+  opacity: 0; /* Start fully transparent */
+  transition: opacity 1s ease-in; /* Animation duration and easing */
+}
+
+.home-divider-image.visible {
+  opacity: 1; /* Fully opaque when visible */
+}
+
 .home-cards {
   gap: var(--dl-space-space-fiveunits);
   width: 100%;

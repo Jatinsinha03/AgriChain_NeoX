@@ -1,6 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import { useState,useEffect } from 'react'
+import { useState,useEffect, useRef } from 'react'
 import abi from "./contractJson/Report.json"
 import { ethers } from 'ethers'
 import { withRouter } from 'react-router-dom';
@@ -18,6 +18,19 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Home = (props) => {
 
+  const [isVisible, setIsVisible] = useState(false);
+    const imageRef = useRef(null);
+
+    const checkVisibility = () => {
+        const rect = imageRef.current.getBoundingClientRect();
+        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+
+        if (rect.top < windowHeight && rect.bottom > 0) {
+            setIsVisible(true);
+            window.removeEventListener('scroll', checkVisibility); // Remove event listener after it becomes visible
+        }
+    };
+
 
   useEffect(() => {
     const tl = gsap.timeline({
@@ -28,6 +41,15 @@ const Home = (props) => {
         scrub: 1, // Smooth scrubbing
       }
     });
+
+
+//try
+
+window.addEventListener('scroll', checkVisibility);
+checkVisibility(); // Check visibility on component mount
+
+
+//try
 
     // Animation for the text
     tl.fromTo(".home-content1", 
@@ -43,6 +65,8 @@ const Home = (props) => {
     );
 
     return () => {
+      window.removeEventListener('scroll', checkVisibility); // Cleanup on unmount
+
       // Cleanup on unmount
       tl.kill();
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
@@ -323,8 +347,8 @@ const Home = (props) => {
           <img
             alt="image"
             src="/hero-divider-1500w.png"
-            
-            className="home-divider-image"
+            className={`home-divider-image ${isVisible ? 'visible' : ''}`}
+            ref={imageRef}
           />
         
       </section>
