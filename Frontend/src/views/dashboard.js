@@ -67,61 +67,55 @@ const Dashboard = () => {
         <title>Dashboard - Contract Form</title>
         <meta property="og:title" content="Dashboard" />
       </Helmet>
-      <img alt="image" src="https://play.teleporthq.io/static/svg/default-img.svg" className="dashboard-image" />
-      <div className="dashboard-container1">
-        <div className="dashboard-container2">
+      <div className="dashboard-form-container">
+        <h1>Contract Form</h1>
+        <form id="contractForm" onSubmit={submitForm}>
           <div>
-            <h1>Contract Form</h1>
-            <form id="contractForm" onSubmit={submitForm}>
-              <div>
-                <label htmlFor="cropType">Type of Crops:</label>
-                <select id="cropType" name="cropType" required>
-                  <option value="" disabled selected>Select type of crops</option>
-                  <option value="Wheat">Wheat</option>
-                  <option value="Rice">Rice</option>
-                  <option value="Corn">Corn</option>
-                  <option value="Barley">Barley</option>
-                  <option value="Soybeans">Soybeans</option>
-                </select>
-              </div>
-              <div>
-                <label htmlFor="state">State:</label>
-                <select id="state" name="state" required>
-                  <option value="" disabled selected>Select state</option>
-                  <option value="Andhra Pradesh">Andhra Pradesh</option>
-                  <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                  <option value="West Bengal">West Bengal</option>
-                  <option value="Delhi">Delhi</option>
-                  <option value="Puducherry">Puducherry</option>
-                </select>
-              </div>
-              <div>
-                <label htmlFor="pricePerKg">Price per kg:</label>
-                <input type="number" id="pricePerKg" name="pricePerKg" placeholder="Enter price per kg" required />
-              </div>
-              <div>
-                <label htmlFor="expectedQuantity">Expected Quantity:</label>
-                <input type="number" id="expectedQuantity" name="expectedQuantity" placeholder="Enter expected quantity" required />
-              </div>
-              <div>
-                <label htmlFor="contractTerms">Contract Terms:</label>
-                <textarea id="contractTerms" name="contractTerms" rows="4" cols="50" placeholder="Provide contract terms..." required></textarea>
-              </div>
-              <div>
-                <label htmlFor="downPayment">Down Payment:</label>
-                <select id="downPayment" name="downPayment" required>
-                  <option value="" disabled selected>Select down payment</option>
-                  <option value="10%">10%</option>
-                  <option value="20%">20%</option>
-                  <option value="30%">30%</option>
-                </select>
-              </div>
-              <button type="Submit">Submit Contract</button>
-            </form>
+            <label htmlFor="cropType">Type of Crops:</label>
+            <select id="cropType" name="cropType" required>
+              <option value="" disabled>Select type of crops</option>
+              <option value="Wheat">Wheat</option>
+              <option value="Rice">Rice</option>
+              <option value="Corn">Corn</option>
+              <option value="Barley">Barley</option>
+              <option value="Soybeans">Soybeans</option>
+            </select>
           </div>
-        </div>
+          <div>
+            <label htmlFor="state">State:</label>
+            <select id="state" name="state" required>
+              <option value="" disabled>Select state</option>
+              <option value="Andhra Pradesh">Andhra Pradesh</option>
+              <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+              <option value="West Bengal">West Bengal</option>
+              <option value="Delhi">Delhi</option>
+              <option value="Puducherry">Puducherry</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="pricePerKg">Price per kg:</label>
+            <input type="number" id="pricePerKg" name="pricePerKg" placeholder="Enter price per kg" required />
+          </div>
+          <div>
+            <label htmlFor="expectedQuantity">Expected Quantity:</label>
+            <input type="number" id="expectedQuantity" name="expectedQuantity" placeholder="Enter expected quantity" required />
+          </div>
+          <div>
+            <label htmlFor="contractTerms">Contract Terms:</label>
+            <textarea id="contractTerms" name="contractTerms" rows="4" cols="50" placeholder="Provide contract terms..." required></textarea>
+          </div>
+          <div>
+            <label htmlFor="downPayment">Down Payment:</label>
+            <select id="downPayment" name="downPayment" required>
+              <option value="" disabled>Select down payment</option>
+              <option value="10%">10%</option>
+              <option value="20%">20%</option>
+              <option value="30%">30%</option>
+            </select>
+          </div>
+          <button type="submit">Submit Contract</button>
+        </form>
       </div>
-      <img alt="image" src="/group%202415.svg" className="dashboard-image1" />
     </div>
   );
 };
