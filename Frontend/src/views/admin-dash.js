@@ -13,6 +13,7 @@ const AdminDash = () => {
   const [account, setAccount] = useState('None');
   const [reports, setReports] = useState([]);
 
+  
   useEffect(() => {
     const initializeProvider = async () => {
       if (window.ethereum) {
