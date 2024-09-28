@@ -49,6 +49,40 @@ window.addEventListener('scroll', checkVisibility);
 checkVisibility(); // Check visibility on component mount
 
 
+// Select all accordion containers
+const accordions = gsap.utils.toArray(".home-element");
+
+// Create the animation timeline
+const tl2 = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".home-faq",
+    start: "top bottom", // Start when the top of the FAQ section hits the bottom of the viewport
+    end: "bottom top", // End when the bottom of the FAQ section hits the top of the viewport
+    scrub: 1, // Smooth scrubbing
+  }
+});
+
+// Staggered animations for each accordion with enhanced effects
+tl2.from(accordions, {
+  y: 50, // Start each accordion 50px down
+  scale: 0.8, // Start with a scale of 0.8
+  opacity: 0, // Start with opacity 0
+  duration: 0.75, // Increased duration
+  stagger: 0.3, // Increased stagger time
+  ease: "power2.out", // Smoother easing
+  rotation: 5, // Slight rotation for effect
+  onComplete: () => {
+    // Optionally, you can add a slight bounce effect on completion
+    
+    gsap.to(accordions, {
+      scale: 1,
+      duration: 0.3,
+      ease: "bounce.out"
+    });
+  }
+});
+
+
 //try
 
     // Animation for the text
@@ -70,6 +104,7 @@ checkVisibility(); // Check visibility on component mount
       // Cleanup on unmount
       tl.kill();
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+
     };
   }, []);
 
@@ -434,8 +469,15 @@ checkVisibility(); // Check visibility on component mount
                   }}
                 />
               </span>
+
+              
+              
             </div>
           </div>
+
+          
+
+          <h1 class="try"></h1>
         </div>
       </section>
       
