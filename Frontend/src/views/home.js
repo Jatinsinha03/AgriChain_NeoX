@@ -19,7 +19,7 @@ const Home = (props) => {
 
   async function loginWithMetaMask() {
 
-    const contractAddress = "0x131706C5b428f44294BFa7aA09ae216a01cA30CD";
+    const contractAddress = "0x6471eacc40d24bc9f4bab843560edfea190730c5";
     const contractABI = abi.abi;
 
     // Check if MetaMask is installed
