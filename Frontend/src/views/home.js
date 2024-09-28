@@ -3,12 +3,51 @@ import { Helmet } from 'react-helmet'
 import { useState,useEffect } from 'react'
 import abi from "./contractJson/Report.json"
 import { ethers } from 'ethers'
-import ChatbotComponent from './chatbot'
 import { withRouter } from 'react-router-dom';
 
 import './home.css'
+// demo demo
+
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
+
+// demo demo
+
 
 const Home = (props) => {
+
+
+  useEffect(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".home-project",
+        start: "top bottom", // Start when the top of the section hits the bottom of the viewport
+        end: "bottom top", // End when the bottom of the section hits the top of the viewport
+        scrub: 1, // Smooth scrubbing
+      }
+    });
+
+    // Animation for the text
+    tl.fromTo(".home-content1", 
+      { x: 100, opacity: 0 }, // Initial state (from)
+      { x: 0, opacity: 1, duration: 1 } // End state (to)
+    );
+
+    // Animation for the image
+    tl.fromTo(".home-image2", 
+      { x: -100, opacity: 0 }, // Initial state (from)
+      { x: 0, opacity: 1, duration: 1 }, // End state (to)
+      "<" // Position it to start at the same time as the previous animation
+    );
+
+    return () => {
+      // Cleanup on unmount
+      tl.kill();
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
 
   const [state, setState] = useState({
     provider: null,
@@ -19,7 +58,7 @@ const Home = (props) => {
 
   async function loginWithMetaMask() {
 
-    const contractAddress = "0x6471eacc40d24bc9f4bab843560edfea190730c5";
+    const contractAddress = "0x131706C5b428f44294BFa7aA09ae216a01cA30CD";
     const contractABI = abi.abi;
 
     // Check if MetaMask is installed
@@ -82,7 +121,6 @@ const Home = (props) => {
         alert('Please install MetaMask extension to login with MetaMask.');
     }
 }
-
 
   return (
     <div className="home-container">
