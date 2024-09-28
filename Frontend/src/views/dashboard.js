@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { ethers } from 'ethers';
-import abi from './contractJson/Report.json'; // Make sure the ABI path is correct
+import abi from './contractJson/Report.json'; // Ensure the ABI is correct
 import './dashboard.css';
 
 const Dashboard = () => {
@@ -14,21 +14,23 @@ const Dashboard = () => {
 
   useEffect(() => {
     const initializeProvider = async () => {
-      if (window.ethereum) {
-        try {
-          const provider = new ethers.providers.Web3Provider(window.ethereum);
-          const signer = provider.getSigner();
-          const contractAddress = '0x131706C5b428f44294BFa7aA09ae216a01cA30CD'; // Update to your actual contract address
-          const contractABI = abi.abi;
-          const contract = new ethers.Contract(contractAddress, contractABI, signer);
-          const accounts = await provider.send('eth_requestAccounts', []);
-          setAccount(accounts[0]);
-          setState({ provider, signer, contract });
-        } catch (error) {
-          console.error('Error initializing provider:', error);
-        }
-      } else {
-        alert('Please install MetaMask!');
+      // Replace 'https://your-neox-rpc-url' with the actual Neox Chain RPC URL
+      const neoxRpcUrl = 'https://neoxt4seed1.ngd.network';
+      const provider = new ethers.providers.JsonRpcProvider(neoxRpcUrl);
+
+      try {
+        const signer = provider.getSigner();
+        const contractAddress = '0x6471EACC40D24bC9F4BAB843560eDFEa190730c5'; // Neox Chain contract address
+        const contractABI = abi.abi;
+        const contract = new ethers.Contract(contractAddress, contractABI, signer);
+        
+        // If Neox supports a similar method to Ethereum for account retrieval:
+        const accounts = await provider.listAccounts();
+        setAccount(accounts[0] || 'None');
+
+        setState({ provider, signer, contract });
+      } catch (error) {
+        console.error('Error initializing provider:', error);
       }
     };
 
@@ -43,7 +45,7 @@ const Dashboard = () => {
     const pricePerKg = parseInt(event.target.elements.pricePerKg.value, 10);
     const expectedQuantity = parseInt(event.target.elements.expectedQuantity.value, 10);
     const contractTerms = event.target.elements.contractTerms.value;
-    const downPayment = parseInt(event.target.elements.downPayment.value.replace('%', ''), 10); // Convert percentage string to number
+    const downPayment = parseInt(event.target.elements.downPayment.value.replace('%', ''), 10);
 
     try {
       const { contract } = state;
@@ -52,7 +54,6 @@ const Dashboard = () => {
         return;
       }
 
-      // Calling the ReportCrime function in the smart contract
       const transaction = await contract.ReportCrime(cropType, stateValue, pricePerKg, expectedQuantity, contractTerms, downPayment);
       await transaction.wait();
       alert('Contract submitted successfully!');
