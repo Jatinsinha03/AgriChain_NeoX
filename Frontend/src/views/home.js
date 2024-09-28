@@ -4,12 +4,12 @@ import { useState,useEffect, useRef } from 'react'
 import abi from "./contractJson/Report.json"
 import { ethers } from 'ethers'
 import { withRouter } from 'react-router-dom';
-
 import './home.css'
 // demo demo
 
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,14 +22,35 @@ const Home = (props) => {
     const imageRef = useRef(null);
 
     const checkVisibility = () => {
+        if (!imageRef.current) return; // Check if the ref is valid
         const rect = imageRef.current.getBoundingClientRect();
         const windowHeight = window.innerHeight || document.documentElement.clientHeight;
 
+        // Check if the image is in the viewport
         if (rect.top < windowHeight && rect.bottom > 0) {
             setIsVisible(true);
-            window.removeEventListener('scroll', checkVisibility); // Remove event listener after it becomes visible
+        } else {
+            setIsVisible(false); // Reset visibility when the image goes out of view
         }
     };
+
+    const headerRef = useRef(null);
+    //hover move
+  
+
+  // const handleMouseMove = (event) => {
+  //   if (textRef.current) {
+  //     const { clientX, clientY } = event;
+  //     const { offsetWidth, offsetHeight } = textRef.current;
+
+  //     // Calculate the center of the text
+  //     const x = clientX - offsetWidth / 2;
+  //     const y = clientY - offsetHeight / 2;
+
+  //     // Apply a slight transform based on cursor position
+  //     textRef.current.style.transform = `translate3d(${x * 0.05}px, ${y * 0.05}px, 0)`;
+  //   }
+  // };
 
 
   useEffect(() => {
@@ -42,6 +63,25 @@ const Home = (props) => {
       }
     });
 
+ const fadeInTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: headerRef.current,
+        start: "top bottom", // Start the animation when the top of the header hits the bottom of the viewport
+        end: "top center", // End when the top of the header is at the center of the viewport
+        scrub: 1, // Smooth scrubbing
+      }
+    });
+
+    // Fade-in animation
+    fadeInTimeline.fromTo(headerRef.current, {
+      opacity: 0, // Initial state
+      y: 50 // Start 50px below
+    }, {
+      opacity: 1, // Final state
+      y: 0, // End at original position
+      duration: 1 // Animation duration
+    });
+    // window.addEventListener('mousemove', handleMouseMove);
 
 //try
 
@@ -64,13 +104,12 @@ const tl2 = gsap.timeline({
 
 // Staggered animations for each accordion with enhanced effects
 tl2.from(accordions, {
-  y: 50, // Start each accordion 50px down
-  scale: 0.8, // Start with a scale of 0.8
+  y: 60, // Start each accordion 50px down
+  scale: 1.0, // Start with a scale of 0.8
   opacity: 0, // Start with opacity 0
-  duration: 0.75, // Increased duration
+  duration: 0.9, // Increased duration
   stagger: 0.3, // Increased stagger time
   ease: "power2.out", // Smoother easing
-  rotation: 5, // Slight rotation for effect
   onComplete: () => {
     // Optionally, you can add a slight bounce effect on completion
     
@@ -103,7 +142,10 @@ tl2.from(accordions, {
 
       // Cleanup on unmount
       tl.kill();
+     
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      fadeInTimeline.kill(); // Cleanup the timeline
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill()); 
 
     };
   }, []);
@@ -381,7 +423,7 @@ tl2.from(accordions, {
         
           <img
             alt="image"
-            src="/hero-divider-1500w.png"
+            src="https://i.ibb.co/fHVQckR/final-removebg-preview.png"
             className={`home-divider-image ${isVisible ? 'visible' : ''}`}
             ref={imageRef}
           />
@@ -402,12 +444,12 @@ tl2.from(accordions, {
             </div>
             
           </div>
-          <img alt="image" src="/group%202415.svg" className="home-image2" />
+          <img alt="image" src="https://i.ibb.co/WsK84nN/pngtree-the-farmers-working-in-the-farm-png-image-12488196-removebg-preview.png" className="home-image2" />
         </div>
       </section>
       <section className="home-faq">
-        <h2 className="home-header3">We have all the answers</h2>
-        <div className="home-accordion">
+      <h2 ref={headerRef} className="home-header3">We have all the answers</h2>
+      <div className="home-accordion">
           <div
             data-role="accordion-container"
             className="home-element accordion"

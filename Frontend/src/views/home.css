@@ -26,6 +26,21 @@
 .home-link {
   display: contents;
 }
+/*gradient*/
+.home-container {
+  width: 100%;
+  display: flex;
+  overflow: auto;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+  background: rgb(0,0,0);
+  background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(9,9,20,1) 48%, rgba(0,212,255,1) 100%);
+  background-size: cover; /* Ensure background covers the entire area */
+}
+
+
+/*gradient*/
 .home-icon {
   top: 53px;
   fill: #D9D9D9;
@@ -429,7 +444,49 @@
   text-align: center;
   font-weight: 500;
   line-height: 108px;
+
+
+
+
+
+
+
+  
+  /* Glassmorphism Background */
+  background: rgba(255, 255, 255, 0.1); /* Light translucent background */
+  backdrop-filter: blur(10px); /* Glass effect blur */
+  -webkit-backdrop-filter: blur(10px); /* Safari support for backdrop-filter */
+  border-radius: 20px; /* Rounded corners for glassy feel */
+  padding: 20px; /* Spacing around the text */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Light border to enhance glass effect */
+
+  /* 3D Shadow Effect */
+  text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.3), /* Main shadow */
+               8px 8px 0px rgba(0, 0, 0, 0.2); /* Deeper shadow */
+  
+  /* Adding some perspective */
+  perspective: 1000px;
+  transform: rotateX(0deg) rotateY(0deg);
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
 }
+
+/* Hover effect to enhance the 3D feel */
+.home-header:hover {
+  transform: rotateX(0deg) rotateY(0deg) scale(1.05);
+  transition: transform 0.5s ease;
+}
+
+/* Hover effect to enhance the 3D feel */
+.home-header:hover {
+  transform: rotateX(0deg) rotateY(0deg) scale(1.05);
+  transition: transform 0.5s ease;
+}
+
+/* 
+try
+*/
+
 .home-caption {
   color: rgb(255, 255, 255);
   font-size: 24px;
@@ -464,13 +521,14 @@
   object-fit: cover;
 }
 .home-divider-image {
-  opacity: 0; /* Start fully transparent */
-  transition: opacity 1s ease-in; /* Animation duration and easing */
+  opacity: 0; /* Initially hidden */
+  transition: opacity 0.5s ease-in-out; /* Transition effect */
 }
 
 .home-divider-image.visible {
-  opacity: 1; /* Fully opaque when visible */
+  opacity: 1; /* Show image when visible */
 }
+
 
 .home-cards {
   gap: var(--dl-space-space-fiveunits);
@@ -1068,6 +1126,23 @@
     line-height: 21px;
   }
 }
-.try{
-  height:60vh;
+.home-description {
+  position: relative; /* Ensure the image can be positioned absolutely */
+  overflow: hidden;height: 100vh; /* Set a height for the section */
 }
+
+.home-divider-image {
+  position: absolute; /* Position the image absolutely */
+  top: -150px; /* Start above the viewport */
+  left: 50%; /* Center the image horizontally */
+  transform: translateX(-50%) scale(0.5); /* Start small and centered */
+  opacity: 0; /* Initially hidden */
+  transition: transform 1s ease-out, opacity 1s ease-out; /* Slow down the transition */
+}
+
+.home-divider-image.visible {
+  top: 50%; /* Move to the center of the section */
+  transform: translate(-50%, -50%) scale(1); /* Enlarge and center */
+  opacity: 1; /* Fade in */
+}
+
