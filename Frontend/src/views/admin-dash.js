@@ -15,24 +15,21 @@ const AdminDash = () => {
 
   useEffect(() => {
     const initializeProvider = async () => {
-      try {
-        // Define the Neox Chain RPC URL and connect to it
-        const neoxRpcUrl = 'https://neoxt4seed1.ngd.network'; // Replace with actual Neox RPC URL
-        const provider = new ethers.providers.JsonRpcProvider(neoxRpcUrl);
-        const signer = provider.getSigner();
-
-        // Neox Chain contract address
-        const contractAddress = '0x6471EACC40D24bC9F4BAB843560eDFEa190730c5'; // Neox Chain contract address
-        const contractABI = abi.abi;
-        const contract = new ethers.Contract(contractAddress, contractABI, signer);
-
-        // For non-MetaMask cases (e.g., pure provider access without MetaMask)
-        const accounts = await provider.listAccounts();
-        setAccount(accounts[0] || 'None');
-
-        setState({ provider, signer, contract });
-      } catch (error) {
-        console.error('Error initializing provider:', error);
+      if (window.ethereum) {
+        try {
+          const provider = new ethers.providers.Web3Provider(window.ethereum);
+          const signer = provider.getSigner();
+          const contractAddress = '0x6AE99dD4D6f1f53ef0925947b9C1802D802D0820'; // Update to your actual contract address
+          const contractABI = abi.abi;
+          const contract = new ethers.Contract(contractAddress, contractABI, signer);
+          const accounts = await provider.send('eth_requestAccounts', []);
+          setAccount(accounts[0]);
+          setState({ provider, signer, contract });
+        } catch (error) {
+          console.error('Error initializing provider:', error);
+        }
+      } else {
+        alert('Please install MetaMask!');
       }
     };
 
@@ -46,14 +43,14 @@ const AdminDash = () => {
         try {
           const reportData = await contract.viewReports();
           // Convert BigNumber to string or number for rendering
-          const formattedReports = reportData.map((report) => ({
+          const formattedReports = reportData.map(report => ({
             timestamp: report.timestamp.toNumber(),
             crops: report.crops,
             state: report.state,
-            price: ethers.utils.formatUnits(report.price, 0), // Adjust decimal precision if needed
+            price: ethers.utils.formatUnits(report.price, 0), // Assuming price is in wei, adjust decimals if needed
             quantity: report.quantity.toString(),
             terms: report.terms,
-            payment: ethers.utils.formatUnits(report.payment, 0), // Adjust decimal precision if needed
+            payment: ethers.utils.formatUnits(report.payment, 0), // Assuming payment is in wei, adjust decimals if needed
           }));
           setReports(formattedReports);
         } catch (error) {
