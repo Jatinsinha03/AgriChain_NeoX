@@ -1,52 +1,52 @@
 
-# Decentralized Crime Reporting System
+# Agro Chain
 
-## Overview
+Farmers often face uncertainties in accessing stable markets, leading to unpredictable incomes and financial instability. To address this challenge, we propose the development of an Assured Contract Farming System—a comprehensive platform designed to provide farmers with guaranteed buyers for their crops through transparent, secure, and reliable agreements. The platform will enable farmers to create listings for their crops, negotiate with buyers, and finalize terms using customizable contract templates. Blockchain-based smart contracts will ensure transparency, immutability, and automatic payment processing, while an integrated escrow service will hold payments until the contract terms are fulfilled, safeguarding both parties’ interests. The platform will support multiple payment options, including bank transfers, mobile payments, and cryptocurrency. AI-driven market analytics will empower users to make informed decisions based on real-time trends, crop prices, and demand forecasts. Additionally, a review and performance tracking system will promote accountability, and 24/7 customer support will be available to resolve any technical or operational issues. This system aims to reduce market risks for farmers, enhance income stability, and foster trust between farmers and buyers.
 
-The Decentralized Crime Reporting System is a web application built on React.js that allows users to report crimes anonymously using the power of blockchain technology. By leveraging the Ethereum blockchain and MetaMask for identity management, the system ensures the privacy and security of users while enabling them to submit crime reports seamlessly.
 
-## Features
-- User authentication using MetaMask: Users can log in to the system using their MetaMask wallet, ensuring secure and decentralized identity management.
-- Anonymous crime reporting: Users can submit crime reports anonymously without revealing their identity, fostering trust and encouraging more people to report incidents.
-- Form-based reporting: The system provides a user-friendly form where users can input details about the crime they wish to report, including the type of crime, location, description, and any supporting evidence.
-- Blockchain integration: Crime reports are stored on the Ethereum blockchain, ensuring immutability, transparency, and tamper resistance. Each report is associated with a unique transaction hash (TXID) for verification and auditing purposes.
-- Decentralized data storage: Crime report data is distributed across the Ethereum network, eliminating the need for centralized servers and reducing the risk of data breaches or censorship.
 
-Sepolia testnet contract address: 0x847F1e87E9692993a3e2B8Dd22867f73e3818281
 
-## Getting Started
-To access the Decentralized Crime Reporting System, simply visit the following link in your web browser:
+## Run Locally
 
-[Decentralized Crime Reporting System](https://hackofiesta-garuda.netlify.app)
-
-Make sure you have the MetaMask extension installed in your web browser. Log in to MetaMask and connect your wallet to interact with the application.
-
-To run the Decentralized Crime Reporting System locally, follow these steps:
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/vatsaltibrewal/hackofiesta.git
-2. Install dependencies:
-   ```bash
-    cd decentralized-crime-reporting-system
-    npm install
-3. Start the development servers:
-   ```bash
-    npm start
-
-4. Open the application in your web browser:
-   ```bash
-    [npm start](http://localhost:3000)
-   
 Connect MetaMask: Make sure you have the MetaMask extension installed in your web browser. Log in to MetaMask and connect your wallet to interact with the application.
 
-Technologies Used
-React.js: Frontend framework for building the user interface.
-Ethereum blockchain: Blockchain platform for storing crime report data securely and transparently.
-MetaMask: Ethereum wallet and identity management tool for user authentication.
-IPFS: InterPlanetary File System for decentralized storage of crime report evidence and documents.
-Contributing
-Contributions to the Decentralized Crime Reporting System are welcome! If you have any ideas for improvements, bug fixes, or new features, feel free to open an issue or submit a pull request. Please follow the contribution guidelines when contributing to this project.
+Clone the project
 
-##HAPPY BUILDING :)
+```bash
+  git clone https://github.com/Jatinsinha03/AgriChain_NeoX.git
+```
+
+Go to the frontend of the project directory
+
+```bash
+  cd AgriChain_NeoX/Frontend
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+Go to the backend of the project directory
+
+```bash
+  cd AgriChain_NeoX/backend
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the backend server
+
+```bash
+  node index.js
+```
+Start the frontend server
+
+```bash
+  npm start
+```
 
