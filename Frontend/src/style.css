@@ -179,3 +179,7 @@
     padding-bottom: var(--dl-space-space-oneandhalfunits);
   }
 }
+
+body{
+  color: black;
+}

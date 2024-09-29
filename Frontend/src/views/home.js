@@ -3,12 +3,12 @@ import { Helmet } from 'react-helmet'
 import { useState,useEffect, useRef } from 'react'
 import abi from "./contractJson/Report.json"
 import { ethers } from 'ethers'
-import { withRouter } from 'react-router-dom';
 import './home.css'
 // demo demo
 
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useNavigate } from 'react-router-dom'
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -17,6 +17,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 
 const Home = (props) => {
+  const navigate = useNavigate();
 
   const [isVisible, setIsVisible] = useState(false);
     const imageRef = useRef(null);
@@ -35,22 +36,7 @@ const Home = (props) => {
     };
 
     const headerRef = useRef(null);
-    //hover move
-  
-
-  // const handleMouseMove = (event) => {
-  //   if (textRef.current) {
-  //     const { clientX, clientY } = event;
-  //     const { offsetWidth, offsetHeight } = textRef.current;
-
-  //     // Calculate the center of the text
-  //     const x = clientX - offsetWidth / 2;
-  //     const y = clientY - offsetHeight / 2;
-
-  //     // Apply a slight transform based on cursor position
-  //     textRef.current.style.transform = `translate3d(${x * 0.05}px, ${y * 0.05}px, 0)`;
-  //   }
-  // };
+    
 
 
   useEffect(() => {
@@ -181,7 +167,7 @@ tl2.from(accordions, {
         setState({ provider, signer, contract });
         // MetaMask is connected and user is logged in
         // Redirect to another page
-        props.history.push('/dashboard');
+        navigate('/dashboard');
         //window.location.href = '/dashboard';
       } catch (error) {
         // User denied account access or MetaMask is not available
@@ -207,7 +193,7 @@ tl2.from(accordions, {
 
             // Redirect if the logged-in account matches the admin address
             if (true) {
-              props.history.push('/admin-dash');  
+              navigate('/admin-dash');  
               //window.location.href = '/admin-dash';
             } else {
               alert('You are not authorized to access the admin dashboard.');
@@ -354,7 +340,7 @@ tl2.from(accordions, {
         <div data-thq="thq-dropdown" className="home-meta-mask list-item"></div>
         <div data-thq="thq-dropdown" className="home-admin list-item">
           <div data-thq="thq-dropdown-toggle" className="home-dropdown-toggle">
-            <span className="home-text05">LOGIN</span>
+            <span className="home-text05">Choose</span>
             <div data-thq="thq-dropdown-arrow" className="home-dropdown-arrow">
               <svg viewBox="0 0 1024 1024" className="home-icon16">
                 <path d="M426 726v-428l214 214z"></path>
@@ -367,7 +353,7 @@ tl2.from(accordions, {
                 data-thq="thq-dropdown-toggle"
                 className="home-dropdown-toggle1"
               >
-                <span className="home-text06" onClick={loginWithMetaMask}>User</span>
+                <span className="home-text06" onClick={loginWithMetaMask}>Create</span>
               </div>
             </li>
             <li data-thq="thq-dropdown" className="home-dropdown1 list-item">
@@ -375,7 +361,7 @@ tl2.from(accordions, {
                 data-thq="thq-dropdown-toggle"
                 className="home-dropdown-toggle2"
               >
-                <span className="home-text07" onClick={loginAsAdmin}>Admin</span>
+                <span className="home-text07" onClick={loginAsAdmin}>Contracts</span>
                 <div
                   data-thq="thq-dropdown-arrow"
                   className="home-dropdown-arrow1"
@@ -528,4 +514,4 @@ tl2.from(accordions, {
   
 }
 
-export default withRouter(Home)
+export default Home;
